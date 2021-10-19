@@ -181,7 +181,7 @@ function checkPasswords(input1, input2, min, max){
     if(input1.value !== input2.value){
         error(input2, 'passwords are not matching');
     }
-        //* input1 ile input iki birbirlerine eşit değilse (eşleşmiyorsa) error verir.
+        //* input1 ile input2 iki birbirlerine eşit değilse (eşleşmiyorsa) error verir.
     
 }
 
