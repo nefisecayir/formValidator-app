@@ -3,50 +3,42 @@ const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const repassword = document.getElementById('repassword');
+const phone = document.getElementById('phone');
+const button = document.getElementById('button');
+
+let allowedInfo = {
+    userName: 'umutGuler',
+    password: 20203030
+}
 
 
-// form.addEventListener('submit', function(e){
-//     e.preventDefault();
-//         //* bunu çalıştırırsak form submit olayını gerçekleştiremez, böylece konsolda kalır, silinmez.
-//     // console.log(username.value);
-    
-//     //* girdiğimiz değerlerin kontrolu (doğru değer mi)
-//     if (username.value === ''){
-//         // username.className = 'form-control error'
-//             //* error'ü kullanmak yerine is-invalid'i de kullanırsak aynı işlevi görür.
-//         username.className = 'form-control is-invalid'
-//     }else{
-//         username.className = 'form-control is-valid'
-//             //* isvalid ile onay işareti çıkar
-//     }
 
-//     if (email.value === ''){
-//         email.className = 'form-control is-invalid'
-//     }
-    
-//     if (password.value === ''){
-//         password.className = 'form-control is-invalid'
-//     }
 
-//     if (repassword.value === ''){
-//         repassword.className = 'form-control is-invalid'
-//     }
-// })
-
+// button.innerHTML =  <button onClick="window.location.href = 'new-page.html'"></button>
 
 
 //* girdiğimiz değerlerin başka bir kontrolu (doğru değer mi)
 
-form.addEventListener('submit', function(e){
-    e.preventDefault();
-        //* bunu çalıştırırsak form submit olayını gerçekleştiremez, böylece konsolda kalır, silinmez.
+form.addEventListener('submit', function(){
+    
+    // e.preventDefault();
+        //* bunu çalıştırırsak form submit olayını gerçekleştiremez, böylece konsolda kalır, silinmez. kısacası sayfa yenilenmez.
     // console.log(username.value);
     
     if (username.value === ''){
         // username.className = 'form-control error'
         error(username, 'please type a username');
 
-    }else{
+        if(username.value == allowedInfo.userName){
+            document.getElementById("button").addEventListener("click", myFunction);
+
+            function myFunction() {
+            document.getElementById("button").innerHTML = onClick="window.location.href='new-page.html'";
+}
+
+    }}
+
+    else{
         success(username);
     }
 
@@ -55,9 +47,9 @@ form.addEventListener('submit', function(e){
             //* ikinci parametre olarak uyarı mesajlarını ekledik.
     }
     else if (!validateEmail(email.value)){
-                //* formata uygun olmadığı zaman error vermesini istrdiğimiz için ! koyduk.
+    //             //* formata uygun olmadığı zaman error vermesini istrdiğimiz için ! koyduk.
         error(email, 'please type an correct e-mail address');
-    }
+     }
         else{
         success(email);
     }
@@ -73,6 +65,7 @@ form.addEventListener('submit', function(e){
     }else{
         success(repassword);
     }
+
 });
 
 function error(input, message){
@@ -94,7 +87,7 @@ function success(input){
 //* REGULAR EXPRESSION
             //* gönderdiğimiz string bilginin belli bir formata uyup uymadığını gösterir.
 
-// function validateEmail(email) {
+//function validateEmail(email) {
 //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //     return re.test(String(email).toLowerCase());
 // }
@@ -111,6 +104,34 @@ function checkEmail(input){
 }
 
 
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+        //* bunu çalıştırırsak form submit olayını gerçekleştiremez, böylece konsolda kalır, silinmez.
+    // console.log(username.value);
+    
+    //* girdiğimiz değerlerin kontrolu (doğru değer mi)
+    if (username.value === ''){
+        // username.className = 'form-control error'
+            //* error'ü kullanmak yerine is-invalid'i de kullanırsak aynı işlevi görür.
+        username.className = 'form-control is-invalid'
+    }else{
+        username.className = 'form-control is-valid'
+            //* isvalid ile onay işareti çıkar
+    }
+
+    if (email.value === ''){
+        email.className = 'form-control is-invalid'
+    }
+    
+    if (password.value === ''){
+        password.className = 'form-control is-invalid'
+    }
+
+    if (repassword.value === ''){
+        repassword.className = 'form-control is-invalid'
+    }
+})
+
       
 
 
@@ -122,47 +143,41 @@ function checkEmail(input){
 //     // console.log(input.value)
 //     if (input.value ===''){
 //         error(input, 'fill this space')
+
 //     }else{
 //         success(input);
 //     }
 // }
 
-// function checkRequired(input){
-//     //* gerekli alanları kontrol etmek için kullanırız.
-// // console.log(input.value)
-// if (input.value ===''){
-//     error(input, 'fill this space')
-// }else{
-//     success(input);
-// }
 
-// }
+form.addEventListener('submit', function(e){
+    e.preventDefault();
 
-// form.addEventListener('submit', function(e){
-//     e.preventDefault();
+    checkRequired(username);
+    checkRequired(email);
+    checkRequired(password);
+    checkRequired(repassword);
 
-//     checkRequired(username);
-//     checkRequired(email);
-//     checkRequired(password);
-//     checkRequired(repassword);
 
-// });
+})
+
 
 
 
 //* daha sade yazımı (liste oluşturma)
-
 function checkRequired(inputs){
-     //* gerekli alanları kontrol etmek için kullanırız.
-    inputs.forEach(function(input){
-        // console.log(input.value)
-        if (input.value ===''){
-            error(input, `fill ${input.id} space`)
-        }else{
-            success(input);
-        }
+    //* gerekli alanları kontrol etmek için kullanırız.
+   inputs.forEach(function(input){
+       // console.log(input.value)
+       if (input.value ===''){
+           error(input, `fill ${input.id} space`)
+           
+       }else{
+           success(input);
 
-    })
+       }
+
+   })
 }
 
 
@@ -193,8 +208,13 @@ function checkPhone(input){
     }
 }
 
+
+
+
+
 form.addEventListener('submit', function(e){
     e.preventDefault();
+    
 
     checkRequired([username, email, password, repassword, phone]);
         //* girdiğimiz değerlerin olması gerekir
@@ -210,4 +230,5 @@ form.addEventListener('submit', function(e){
     checkPhone(phone);
         //* karakter uzunluğu kontrolü
 
-});
+
+})
